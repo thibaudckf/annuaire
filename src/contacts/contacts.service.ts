@@ -10,15 +10,36 @@ export class ContactsService {
         private contactsRepository: Repository<Contact>,
     ){}
 
+    /*method to get the list of contact*/ 
     getContacts():Promise<Contact[]>{
         return this.contactsRepository.find();
     }
 
-    findOne(id: number): Promise<Contact> {
-        return this.contactsRepository.findOneBy({ id});
-      }
+    /*method to find a contact with his id */
+    findOneById(id: number): Promise<Contact> {
+        return this.contactsRepository.findOneBy({id});
+    }
+
+    /*method to find a contact with his name */
+    findOneByName(nom: string): Promise<Contact[]> {
+        return this.contactsRepository.findBy({nom});
+    }
+
+    /*method to find a contact with his first name */
+    findOneByFirstName(prenom: string): Promise<Contact[]> {
+        return this.contactsRepository.findBy({prenom});
+    }
 
     createContact(contact: Contact):Promise<Contact>{
         return this.contactsRepository.save(contact);
+    }
+
+    async remove(id: number): Promise<void> {
+        await this.contactsRepository.delete(id);
+      }
+
+    update(id: number, contact:Partial<Contact>){
+        this.contactsRepository.update({id}, contact);
+        return this.contactsRepository.findOne({where:{id}});
     }
 }

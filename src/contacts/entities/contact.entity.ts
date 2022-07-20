@@ -10,4 +10,7 @@ export class Contact{
 
     @Column()
     prenom: string;
+
+    @Column()
+    numero: string;
 }
