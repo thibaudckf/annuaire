@@ -18,12 +18,17 @@ export class ContactsController {
 
     @Get('findByName/:name')
     getByName(@Param('name') name: string){
-        return this.contactsService.findOneByName(name);
+        return this.contactsService.findByName(name);
     }
 
     @Get('findByFirstName/:firstName')
     getByFirstName(@Param('firstName') firstName: string){
-        return this.contactsService.findOneByFirstName(firstName);
+        return this.contactsService.findByFirstName(firstName);
+    }
+
+    @Get('findByNum/:num')
+    getByNum(@Param('num') num: string){
+        return this.contactsService.findByNum(num);
     }
 
     @Post()
@@ -36,7 +41,7 @@ export class ContactsController {
         return this.contactsService.update(id, body);
     }
 
-    @Delete('/:id')
+    @Delete('del/:id')
     remove(@Param('id') id: number):Promise<void>{
         return this.contactsService.remove(id);
     }
