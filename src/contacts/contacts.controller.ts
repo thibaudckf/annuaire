@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ContactsService } from './contacts.service';
 import { Contact } from './entities/contact.entity';
 
+
+
 @Controller('contacts')
 export class ContactsController {
     constructor(private readonly contactsService: ContactsService){}
@@ -36,12 +38,12 @@ export class ContactsController {
         return this.contactsService.createContact(body);
     }
 
-    @Put('/:id')
+    @Put('set/:id')
     update(@Param('id') id: number, @Body() body:Contact ):Promise<Contact>{
         return this.contactsService.update(id, body);
     }
 
-    @Delete('del/:id')
+    @Delete('delete/:id')
     remove(@Param('id') id: number):Promise<void>{
         return this.contactsService.remove(id);
     }
