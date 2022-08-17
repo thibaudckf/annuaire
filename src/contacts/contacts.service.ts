@@ -44,7 +44,7 @@ export class ContactsService {
       }
 
     update(id: number, contact:Partial<Contact>){
-        this.contactsRepository.update({id}, contact);
+        this.contactsRepository.update(id, contact);
         return this.contactsRepository.findOne({where:{id}});
     }
 }

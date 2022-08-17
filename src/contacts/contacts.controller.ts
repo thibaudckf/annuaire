@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './entities/contact.entity';
 
@@ -38,7 +38,7 @@ export class ContactsController {
         return this.contactsService.createContact(body);
     }
 
-    @Put('set/:id')
+    @Patch('set/:id')
     update(@Param('id') id: number, @Body() body:Contact ):Promise<Contact>{
         return this.contactsService.update(id, body);
     }
