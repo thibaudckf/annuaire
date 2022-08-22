@@ -6,11 +6,11 @@ export class Contact{
     id: number;
 
     @Column()
-    nom: string;
+    name: string;
 
     @Column()
-    prenom: string;
+    firstname: string;
 
     @Column()
-    numero: string;
+    phone: string;
 }

@@ -12,6 +12,7 @@ export class ContactsService {
 
     /*method to get the list of contact*/ 
     getContacts():Promise<Contact[]>{
+       
         return this.contactsRepository.find();
     }
 
@@ -21,18 +22,18 @@ export class ContactsService {
     }
 
     /*method to find a contact with his name */
-    findByName(nom: string): Promise<Contact[]> {
-        return this.contactsRepository.findBy({nom});
+    findByName(name: string): Promise<Contact[]> {
+        return this.contactsRepository.findBy({name});
     }
 
     /*method to find a contact with his first name */
-    findByFirstName(prenom: string): Promise<Contact[]> {
-        return this.contactsRepository.findBy({prenom});
+    findByFirstName(firstname: string): Promise<Contact[]> {
+        return this.contactsRepository.findBy({firstname});
     }
 
     /*method to find a contact with his phone number */
-    findByNum(numero: string): Promise<Contact[]> {
-        return this.contactsRepository.findBy({numero});
+    findByNum(phone: string): Promise<Contact[]> {
+        return this.contactsRepository.findBy({phone});
     }
 
     createContact(contact: Contact):Promise<Contact>{
