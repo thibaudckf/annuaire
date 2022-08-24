@@ -3,11 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Contact } from './entities/contact.entity';
 
+
 @Injectable()
 export class ContactsService {
   constructor(
     @InjectRepository(Contact)
-    private contactsRepository: Repository<Contact>,
+    private readonly contactsRepository: Repository<Contact>,
   ) {}
 
   /*method to get the list of contact*/

@@ -4,9 +4,10 @@ import { ContactsController } from './contacts.controller';
 import { ContactsService } from './contacts.service';
 import { Contact } from './entities/contact.entity';
 
+
 @Module({
   imports:[TypeOrmModule.forFeature([Contact])],
   controllers: [ContactsController],
-  providers: [ContactsService]
+  providers: [ContactsService],
 })
 export class ContactsModule {}

@@ -1,38 +1,124 @@
 module.exports = {
-	'env': {
-		'browser': true,
-		'es2021': true
-	},
-	'extends': [
-		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended'
-	],
-	'overrides': [
-	],
-	'parser': '@typescript-eslint/parser',
-	'parserOptions': {
-		'ecmaVersion': 'latest',
-		'sourceType': 'module'
-	},
-	'plugins': [
-		'@typescript-eslint'
-	],
-	'rules': {
-		'indent': [
-			'error',
-			'tab'
-		],
-		'linebreak-style': [
-			'error',
-			'windows'
-		],
-		'quotes': [
-			'error',
-			'single'
-		],
-		'semi': [
-			'error',
-			'always'
-		]
-	}
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        project: 'tsconfig.json',
+        sourceType: 'module',
+    },
+    plugins: [
+        '@typescript-eslint/eslint-plugin',
+        'import',
+    ],
+    extends: [
+        'plugin:@typescript-eslint/recommended',
+    ],
+    root: true,
+    env: {
+        node: true,
+        jest: true,
+    },
+    ignorePatterns: ['.eslintrc.js'],
+    rules: {
+        '@typescript-eslint/interface-name-prefix': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/array-type': ['error', {'default': 'array-simple'}],
+        '@typescript-eslint/await-thenable': 'error',
+        '@typescript-eslint/brace-style': 'error',
+        '@typescript-eslint/no-invalid-this': 'error',
+        '@typescript-eslint/no-shadow': 'error',
+        '@typescript-eslint/no-useless-constructor': 'error',
+        '@typescript-eslint/class-literal-property-style': ['error', 'fields'],
+        '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
+        'no-template-curly-in-string': 'error',
+        'no-unreachable-loop': 'error',
+        'require-atomic-updates': 'error',
+        'import/newline-after-import': ['error', {'count': 2}],
+        'import/order': ['error', {
+            'groups': [
+                'builtin',
+                'external',
+                'internal',
+                ['parent', 'sibling'],
+                'index',
+                'object',
+            ],
+            "pathGroups": [
+                {"pattern": '@payment-gateway/**', "group": 'internal'},
+            ],
+            "pathGroupsExcludedImportTypes": ['builtin', 'object'], // Without this option, the plugin do not work for internal custom path
+        }],
+        'import/exports-last': 'error',
+        'import/no-absolute-path': 'error',
+        'import/no-anonymous-default-export': 'error',
+        'import/no-cycle': 'error',
+        'import/no-self-import': 'error',
+        'import/no-useless-path-segments': 'error',
+        'block-scoped-var': 'error',
+        'consistent-return': 'error',
+        'curly': 'error',
+        'default-case': 'error',
+        'no-constructor-return': 'error',
+        'no-eval': 'error',
+        'no-implicit-globals': 'error',
+        'no-lone-blocks': 'error',
+        'no-new': 'error',
+        'no-new-wrappers': 'error',
+        'no-return-assign': 'error',
+        'no-return-await': 'error',
+        'no-self-compare': 'error',
+        'no-unmodified-loop-condition': 'error',
+        'no-useless-concat': 'error',
+        'yoda': 'error',
+        'camelcase': 'error',
+        'func-style': ['error', 'declaration'],
+        'no-duplicate-imports': 'off',
+        '@typescript-eslint/no-duplicate-imports': ['error', {'includeExports': true}],
+        'no-useless-computed-key': 'error',
+        'prefer-rest-params': 'error',
+        'prefer-spread': 'error',
+        'prefer-template': 'error',
+        "comma-dangle": "off",
+        '@typescript-eslint/comma-dangle': ['error', {
+            'arrays': 'always-multiline',
+            'objects': 'always-multiline',
+            'imports': 'always-multiline',
+            'exports': 'always-multiline',
+            'functions': 'always-multiline',
+            'enums': 'always-multiline',
+        }],
+        'comma-spacing': 'off',
+        '@typescript-eslint/comma-spacing': 'error',
+        'dot-notation': 'off',
+        '@typescript-eslint/dot-notation': 'error',
+        'keyword-spacing': 'off',
+        '@typescript-eslint/keyword-spacing': [`error`],
+        'lines-between-class-members': 'off',
+        '@typescript-eslint/lines-between-class-members': ['error', {exceptAfterSingleLine: true}],
+        '@typescript-eslint/member-delimiter-style': 'error',
+        '@typescript-eslint/no-non-null-assertion': 'error',
+        'object-curly-spacing': 'off',
+        '@typescript-eslint/object-curly-spacing': ['error', 'always', {'arraysInObjects': false}],
+        '@typescript-eslint/prefer-nullish-coalescing': 'error',
+        '@typescript-eslint/prefer-for-of': 'error',
+        '@typescript-eslint/prefer-includes': 'error',
+        '@typescript-eslint/prefer-optional-chain': 'error',
+        '@typescript-eslint/prefer-readonly': 'error',
+        '@typescript-eslint/prefer-reduce-type-parameter': 'error',
+        '@typescript-eslint/prefer-string-starts-ends-with': 'error',
+        '@typescript-eslint/require-array-sort-compare': 'error',
+        'semi': 'off',
+        '@typescript-eslint/semi': 'error',
+        '@typescript-eslint/switch-exhaustiveness-check': 'error',
+        '@typescript-eslint/type-annotation-spacing': 'error',
+        '@typescript-eslint/typedef': ['error', {
+            arrayDestructuring: true,
+            memberVariableDeclaration: true,
+            objectDestructuring: true,
+            parameters: true,
+            propertyDeclaration: true,
+            variableDeclarationIgnoreFunction: true
+        }],
+        '@typescript-eslint/no-namespace': 'off',
+    },
 };

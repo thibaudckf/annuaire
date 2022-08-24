@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ContactsModule } from './contacts/contacts.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Contact } from './contacts/entities/contact.entity';
+
 
 @Module({
   imports: [ContactsModule, 
@@ -16,7 +17,7 @@ import { Contact } from './contacts/entities/contact.entity';
               database: 'DB_Contacts',
               entities: [Contact],
               synchronize: true,
-            })
+            }),
   ],
   controllers: [AppController],
   providers: [AppService],
