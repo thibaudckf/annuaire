@@ -26,7 +26,7 @@ export class ContactsController {
   }
 
   @Get('findBySearch/:critere/:search')
-  findBySearch(@Param('critere') critere: string , @Param('search') search: string) {
+  findBySearch(@Param('critere') critere: string, @Param('search') search: string) {
     return this.contactsService.findBySearch(critere, search);
   }
 
