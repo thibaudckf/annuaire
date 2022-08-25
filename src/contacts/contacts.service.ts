@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { first } from 'rxjs';
 import { Repository } from 'typeorm';
 import { Contact } from './entities/contact.entity';
 
@@ -16,24 +17,24 @@ export class ContactsService {
     return this.contactsRepository.find();
   }
 
+  findBySearch(critere: string, search:string) : Promise<Contact[]>{
+    if(critere == 'firstname'){
+      let firstname = search;
+      return this.contactsRepository.findBy({ firstname });
+    }else if(critere == 'name'){
+      let name = search;
+      return this.contactsRepository.findBy({ name });
+    }else if(critere == 'phone'){
+      let phone = search;
+      return this.contactsRepository.findBy({ phone });
+    }else{
+      return null;
+    }
+  }
+
   /*method to find a contact with his id */
   findOneById(id: number): Promise<Contact> {
     return this.contactsRepository.findOneBy({ id });
-  }
-
-  /*method to find a contact with his name */
-  findByName(name: string): Promise<Contact[]> {
-    return this.contactsRepository.findBy({ name });
-  }
-
-  /*method to find a contact with his first name */
-  findByFirstName(firstname: string): Promise<Contact[]> {
-    return this.contactsRepository.findBy({ firstname });
-  }
-
-  /*method to find a contact with his phone number */
-  findByNum(phone: string): Promise<Contact[]> {
-    return this.contactsRepository.findBy({ phone });
   }
 
   createContact(contact: Contact): Promise<Contact> {

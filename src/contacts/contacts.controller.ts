@@ -25,19 +25,9 @@ export class ContactsController {
     return this.contactsService.findOneById(id);
   }
 
-  @Get('findByName/:name')
-  getByName(@Param('name') name: string) {
-    return this.contactsService.findByName(name);
-  }
-
-  @Get('findByFirstName/:firstName')
-  getByFirstName(@Param('firstName') firstName: string) {
-    return this.contactsService.findByFirstName(firstName);
-  }
-
-  @Get('findByNum/:num')
-  getByNum(@Param('num') num: string) {
-    return this.contactsService.findByNum(num);
+  @Get('findBySearch/:critere/:search')
+  findBySearch(@Param('critere') critere: string , @Param('search') search: string) {
+    return this.contactsService.findBySearch(critere, search);
   }
 
   @Post()
