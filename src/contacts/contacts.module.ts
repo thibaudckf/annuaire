@@ -16,14 +16,20 @@ import { RemoveContactCommand } from './commands/removeContact.command';
 import { RemoveContactHandler } from './commands/removeContact.handler';
 import { UpdateContactCommand } from './commands/updateContact.command';
 import { UpdateContactHandler } from './commands/updateContact.handler';
-
+import { BullModule } from '@nestjs/bull';
+import { ContactProcessor } from './contacts.processor';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Contact]) , CqrsModule],
+  imports:[TypeOrmModule.forFeature([Contact]) , CqrsModule, 
+            BullModule.registerQueue({
+              name: 'contact-queue'
+            }),
+  ],
   controllers: [ContactsController],
   providers: [GetContactsHandler, GetContactsQuery, 
               GetByIdQuery, GetByIdHandler, GetBySearchHandler, GetBySearchQuery, 
               AddContactCommand, AddContactHandler, RemoveContactCommand, RemoveContactHandler,
-              UpdateContactCommand, UpdateContactHandler],
+              UpdateContactCommand, UpdateContactHandler, 
+              ContactProcessor],
 })
 export class ContactsModule {}

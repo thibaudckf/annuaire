@@ -17,13 +17,15 @@ import { GetBySearchQuery } from './queries/getBySearch.query';
 import { AddContactCommand } from './commands/addContact.command';
 import { RemoveContactCommand } from './commands/removeContact.command';
 import { UpdateContactCommand } from './commands/updateContact.command';
-
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 
 
 @Controller('contacts')
 export class ContactsController {
   constructor(private readonly queryBus: QueryBus,
-              private readonly commandBus: CommandBus,) {}
+              private readonly commandBus: CommandBus,
+              @InjectQueue('contact-queue') private readonly contactQueue: Queue,) {}
 
   @Get()
   async getContacts(): Promise<Contact[]> {
@@ -48,17 +50,19 @@ export class ContactsController {
   }
 
   @Post()
-  newContact(@Body() body: Contact): Promise<Contact> {
-    return this.commandBus.execute(
+  async newContact(@Body() body: Contact){
+    /*return this.commandBus.execute(
       new AddContactCommand(body)
-    )
+    )*/
+    return await this.contactQueue.add('add', body);
   }
 
   @Patch('set/:id')
-  update(@Param('id') id: number, @Body() body: Contact): Promise<Contact> {
-    return this.commandBus.execute(
+  async update(@Param('id') id: number, @Body() body: Contact){
+    /*return this.commandBus.execute(
       new UpdateContactCommand(id, body)
-    );
+    );*/
+    return await this.contactQueue.add('update', {idContact: id, contact: body})
   }
 
   @Delete('delete/:id')

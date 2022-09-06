@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ContactsModule } from './contacts/contacts.module';
 import { Contact } from './contacts/entities/contact.entity';
+import { BullModule } from '@nestjs/bull';
 
 
 @Module({
@@ -18,6 +19,13 @@ import { Contact } from './contacts/entities/contact.entity';
               entities: [Contact],
               synchronize: true,
             }),
+            BullModule.forRoot({
+              redis: {
+                host: 'localhost',
+                port: 6379,
+              },
+            }),
+            
   ],
   controllers: [AppController],
   providers: [AppService],
