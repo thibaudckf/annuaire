@@ -10,11 +10,13 @@ import { GetBySearchQuery } from "./getBySearch.query";
 export class GetBySearchHandler implements IQueryHandler<GetBySearchQuery> {
   constructor(
     @InjectRepository(Contact)
-    private contactsRepository: Repository<Contact>,
+    private readonly contactsRepository: Repository<Contact>,
   ) {}
  
   async execute(query: GetBySearchQuery) {
-    const {critere, search} = query;
+    const critere = query.critere;
+    const search = query.search;
+
     if (critere == 'firstname'){
         const firstname = search;
         return this.contactsRepository.findBy({ firstname });

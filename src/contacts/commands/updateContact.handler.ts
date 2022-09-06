@@ -11,11 +11,12 @@ import { UpdateContactCommand } from "./updateContact.command";
 export class UpdateContactHandler implements ICommandHandler<UpdateContactCommand> {
   constructor(
     @InjectRepository(Contact)
-    private contactsRepository: Repository<Contact>,
+    private readonly contactsRepository: Repository<Contact>,
   ) {}
  
   async execute(command: UpdateContactCommand) {
-    const {id, contact} = command;
+    const id = command.id;
+    const contact = command.contact;
     await this.contactsRepository.update(id, contact);
   }
 }

@@ -3,7 +3,7 @@ import { CommandBus } from '@nestjs/cqrs';
 import { Job } from 'bull';
 import { AddContactCommand } from './commands/addContact.command';
 import { UpdateContactCommand } from './commands/updateContact.command';
-import { Contact } from './entities/contact.entity';
+
 
 @Processor('contact-queue')
 export class ContactProcessor {
@@ -12,8 +12,8 @@ export class ContactProcessor {
     @Process('add')
     addContact(job: Job) {
         return this.commandBus.execute(
-            new AddContactCommand(job.data)
-        )
+            new AddContactCommand(job.data),
+        );
     }
 
     @Process('update')
@@ -21,8 +21,8 @@ export class ContactProcessor {
         const id = job.data.idContact;
         const contact = job.data.contact;
         return this.commandBus.execute(
-            new UpdateContactCommand(id, contact)
-        )
+            new UpdateContactCommand(id, contact),
+        );
         
     }
 }

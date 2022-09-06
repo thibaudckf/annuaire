@@ -1,4 +1,3 @@
-
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -11,11 +10,12 @@ import { AddContactCommand } from "./addContact.command";
 export class AddContactHandler implements ICommandHandler<AddContactCommand> {
   constructor(
     @InjectRepository(Contact)
-    private contactsRepository: Repository<Contact>,
+    private readonly contactsRepository: Repository<Contact>,
   ) {}
  
   async execute(command: AddContactCommand) {
-    const {contact} = command;
+    //const { contact } = command;
+    const contact = command.contact;
     await this.contactsRepository.save(contact);
   }
 }

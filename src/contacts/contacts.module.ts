@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BullModule } from '@nestjs/bull';
 import { ContactsController } from './contacts.controller';
-import { ContactsService } from './contacts.service';
 import { Contact } from './entities/contact.entity';
 import { GetByIdQuery } from './queries/getById.query';
 import { GetByIdHandler } from './queries/getById.handler';
@@ -16,13 +16,13 @@ import { RemoveContactCommand } from './commands/removeContact.command';
 import { RemoveContactHandler } from './commands/removeContact.handler';
 import { UpdateContactCommand } from './commands/updateContact.command';
 import { UpdateContactHandler } from './commands/updateContact.handler';
-import { BullModule } from '@nestjs/bull';
 import { ContactProcessor } from './contacts.processor';
 
+
 @Module({
-  imports:[TypeOrmModule.forFeature([Contact]) , CqrsModule, 
+  imports:[TypeOrmModule.forFeature([Contact]), CqrsModule, 
             BullModule.registerQueue({
-              name: 'contact-queue'
+              name: 'contact-queue',
             }),
   ],
   controllers: [ContactsController],

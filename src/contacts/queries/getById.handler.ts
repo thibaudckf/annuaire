@@ -9,11 +9,11 @@ import { GetByIdQuery } from "./getById.query";
 export class GetByIdHandler implements IQueryHandler<GetByIdQuery> {
   constructor(
     @InjectRepository(Contact)
-    private contactsRepository: Repository<Contact>,
+    private readonly contactsRepository: Repository<Contact>,
   ) {}
  
   async execute(query: GetByIdQuery) {
-    const {id} = query;
-    return await this.contactsRepository.findOneBy({id});  
+    const id = query.id;
+    return this.contactsRepository.findOneBy({ id });  
   }
 }
