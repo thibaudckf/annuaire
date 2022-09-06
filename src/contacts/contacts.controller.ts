@@ -9,15 +9,21 @@ import {
 } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './entities/contact.entity';
+import { QueryBus } from '@nestjs/cqrs';
+import { GetContactsQuery } from './queries/getContacts.query';
 
 
 @Controller('contacts')
 export class ContactsController {
-  constructor(private readonly contactsService: ContactsService) {}
+  constructor(private readonly contactsService: ContactsService,
+              private queryBus: QueryBus,) {}
 
   @Get()
-  getContacts(): Promise<Contact[]> {
-    return this.contactsService.getContacts();
+  async getContacts(): Promise<Contact[]> {
+      return this.queryBus.execute(
+        new GetContactsQuery()
+      )
+    
   }
 
   @Get('findByID/:id')
