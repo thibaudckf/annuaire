@@ -2,16 +2,18 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Contact } from "../entities/contact.entity";
-import { GetContactsQuery } from "./getContacts.query";
+import { GetByIdQuery } from "./getById.query";
 
-@QueryHandler(GetContactsQuery)
-export class GetContactsHandler implements IQueryHandler<GetContactsQuery> {
+
+@QueryHandler(GetByIdQuery)
+export class GetByIdHandler implements IQueryHandler<GetByIdQuery> {
   constructor(
     @InjectRepository(Contact)
     private contactsRepository: Repository<Contact>,
   ) {}
  
-  async execute(query: GetContactsQuery) {
-    return this.contactsRepository.find();
+  async execute(query: GetByIdQuery) {
+    const {id} = query;
+    return await this.contactsRepository.findOneBy({id});  
   }
 }

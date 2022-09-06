@@ -11,11 +11,12 @@ export class ContactsService {
     private readonly contactsRepository: Repository<Contact>,
   ) {}
 
-  /*method to get the list of contact*/
+  /*method to get the list of contact
   getContacts(): Promise<Contact[]> {
     return this.contactsRepository.find();
-  }
+  }*/
 
+  /*
   findBySearch(critere: string, search: string): Promise<Contact[]>{
     if (critere == 'firstname'){
       const firstname = search;
@@ -30,22 +31,29 @@ export class ContactsService {
       return null;
     }
   }
+  */
 
-  /*method to find a contact with his id */
+  /*method to find a contact with his id 
   findOneById(id: number): Promise<Contact> {
     return this.contactsRepository.findOneBy({ id });
-  }
+  }*/
 
+  /*
   createContact(contact: Contact): Promise<Contact> {
     return this.contactsRepository.save(contact);
   }
+  */
 
+  /*
   async remove(id: number): Promise<void> {
     await this.contactsRepository.delete(id);
   }
+  */
 
+  /*
   update(id: number, contact: Partial<Contact>) {
     this.contactsRepository.update(id, contact);
     return this.contactsRepository.findOne({ where: { id } });
   }
+  */
 }
