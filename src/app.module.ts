@@ -14,7 +14,7 @@ import { Contact } from './contacts/entities/contact.entity';
               host: 'localhost',
               port: 5432,
               username: 'postgres',
-              password: 'THch2001',
+              password: '',
               database: 'DB_Contacts',
               entities: [Contact],
               synchronize: true,
