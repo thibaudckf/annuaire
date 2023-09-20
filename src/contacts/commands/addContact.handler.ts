@@ -15,6 +15,7 @@ export class AddContactHandler implements ICommandHandler<AddContactCommand> {
  
   async execute(command: AddContactCommand) {
     //const { contact } = command;
+    //ifienjbvnjevbhev
     const contact = command.contact;
     await this.contactsRepository.save(contact);
   }
